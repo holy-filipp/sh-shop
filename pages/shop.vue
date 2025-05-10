@@ -1,4 +1,4 @@
 <template>
-  <IndexHero />
+  <Shop />
 </template>
 <script lang="ts" setup></script>

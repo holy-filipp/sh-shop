@@ -14,13 +14,13 @@
         <UDropdownMenu v-if="TEST_LOGGED_IN" :items="DROPDOWN_ITEMS" :content="{ align: 'end' }">
           <UButton icon="i-lucide-menu">Филипп А.</UButton>
         </UDropdownMenu>
-        <UButton icon="i-lucide-log-in" v-else>Войти</UButton>
+        <UButton icon="i-lucide-log-in" to="/auth/login" v-else>Войти</UButton>
         <UChip :text="1" size="3xl">
           <UButton icon="i-lucide-shopping-cart" variant="soft" />
         </UChip>
       </div>
     </UContainer>
-    <HeaderMenu v-if="menu.isOpened" :items="NAV_ITEMS" />
+    <HeaderMenu v-if="menu.isOpened" :nav="NAV_ITEMS" :dropdown="DROPDOWN_ITEMS" />
   </header>
 </template>
 <script lang="ts" setup>

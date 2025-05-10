@@ -13,4 +13,7 @@ export default defineNuxtConfig({
       },
     ],
   },
+  routeRules: {
+    '/cms/**': { proxy: `${process.env.API_BASE_URL}/**` },
+  },
 })
