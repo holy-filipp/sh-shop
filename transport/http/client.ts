@@ -1,5 +1,6 @@
 import { useLocalStorage } from '@vueuse/core'
 import { API_BASE_URL } from '~/config/main'
+import { jwtStorage } from '~/utils/jwt'
 
 interface StripeError {
   status: number
@@ -21,7 +22,7 @@ export class ApiError extends Error {
 
 export const client = {
   async request<T>(method: string, opts?: RequestInit & { json?: unknown }) {
-    const jwt = useLocalStorage('jwt', '')
+    const jwt = jwtStorage.get()
     const headers: HeadersInit = new Headers(opts?.headers)
 
     headers.set('Authorization', `Bearer ${jwt}`)

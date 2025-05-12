@@ -1,5 +1,5 @@
 <template>
-  <UForm :schema="schema" :state="state" class="flex w-64 flex-col gap-3">
+  <UForm :schema="schema" :state="state" class="flex w-64 flex-col gap-3" @submit="handleSubmit">
     <UFormField label="Email" name="email">
       <UInput v-model="state.email" class="w-full" />
     </UFormField>
@@ -14,7 +14,7 @@
     </UFormField>
     <div class="flex flex-col gap-2">
       <UButton type="submit" icon="i-lucide-user-plus" loading-auto class="justify-center">Создать аккаунт</UButton>
-      <UCheckbox label="Запомнить меня" />
+      <UCheckbox label="Запомнить меня" name="remember" v-model="state.remember" />
       <div class="flex items-center justify-between">
         Есть аккаунт?
         <ULink to="/auth/login" as="button">Войти</ULink>
@@ -25,6 +25,7 @@
 <script lang="ts" setup>
 import { z } from 'zod'
 import parsePhoneNumber from 'libphonenumber-js'
+import { useSignup } from '~/composables/useSignup'
 
 const fullPasswordSchema = z
   .string()
@@ -54,18 +55,21 @@ const schema = z
     phone: phoneNumberSchema,
     password: fullPasswordSchema,
     repeatPassword: fullPasswordSchema,
+    remember: z.boolean().default(true),
   })
   .refine((data) => data.password === data.repeatPassword, {
     message: 'Пароли не совпадают',
     path: ['repeatPassword'],
   })
 
-type Schema = z.output<typeof schema>
+export type SignUpSchema = z.output<typeof schema>
 
-const state = reactive<Partial<Schema>>({
+const state = reactive<Partial<SignUpSchema>>({
   email: '',
   phone: '',
   password: '',
   repeatPassword: '',
+  remember: true,
 })
+const { handleSubmit } = useSignup()
 </script>
