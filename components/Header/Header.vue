@@ -10,9 +10,9 @@
         @click="menu.toggle"
       />
       <UNavigationMenu highlight highlight-color="primary" :items="NAV_ITEMS" class="hidden md:flex" />
-      <div class="flex hidden items-center gap-2 md:flex">
-        <UDropdownMenu v-if="TEST_LOGGED_IN" :items="DROPDOWN_ITEMS" :content="{ align: 'end' }">
-          <UButton icon="i-lucide-menu">Филипп А.</UButton>
+      <div class="hidden items-center gap-2 md:flex">
+        <UDropdownMenu v-if="auth.isAuthorized()" :items="DROPDOWN_ITEMS" :content="{ align: 'end' }">
+          <UButton icon="i-lucide-menu">{{ auth.user?.email }}</UButton>
         </UDropdownMenu>
         <UButton icon="i-lucide-log-in" to="/auth/login" v-else>Войти</UButton>
         <UChip :text="1" size="3xl">
@@ -27,6 +27,10 @@
 import type { NavigationMenuItem } from '#ui/components/NavigationMenu.vue'
 import type { DropdownMenuItem } from '#ui/components/DropdownMenu.vue'
 import { useMenuStore } from '~/store/ui/menu'
+import { useAuthStore } from '~/store/auth'
+
+const auth = useAuthStore()
+const menu = useMenuStore()
 
 const NAV_ITEMS: NavigationMenuItem[] = [
   {
@@ -50,10 +54,10 @@ const DROPDOWN_ITEMS: DropdownMenuItem[] = [
     label: 'Выйти из аккаунта',
     icon: 'i-lucide-log-out',
     color: 'error',
+    onSelect: () => {
+      auth.logout()
+      jwtStorage.cleanup()
+    },
   },
 ]
-
-const TEST_LOGGED_IN: boolean = false
-
-const menu = useMenuStore()
 </script>

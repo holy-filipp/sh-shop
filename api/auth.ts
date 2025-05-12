@@ -1,11 +1,12 @@
 import { client } from '~/transport/http/client'
+import { queryOptions } from '@tanstack/vue-query'
 
 interface IAuthLogIn {
   identifier: string
   password: string
 }
 
-interface IUserDto {
+export interface IUserDto {
   id: number
   documentId: string
   username: string
@@ -17,6 +18,7 @@ interface IUserDto {
   updatedAt: string
   publishedAt: string
   phone: string
+  name: string
 }
 
 interface IAuthResponseDto {
@@ -45,4 +47,10 @@ export const authApi = {
       json: data,
     })
   },
+  getMeQueryOptions: () => (queryOptions({
+    queryKey: [authApi.baseKey, 'me'],
+    queryFn: (meta) => client.request<IUserDto>('api/users/me', {
+      signal: meta.signal,
+    })
+  }))
 }

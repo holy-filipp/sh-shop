@@ -1,4 +1,3 @@
-import { useLocalStorage } from '@vueuse/core'
 import { API_BASE_URL } from '~/config/main'
 import { jwtStorage } from '~/utils/jwt'
 
@@ -54,8 +53,6 @@ export const client = {
 
         throw new ApiError(code, message)
       }
-
-      console.debug(`Request ${method} succeeded`)
 
       try {
         return (await r.json()) as Promise<T>

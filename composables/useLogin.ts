@@ -4,6 +4,7 @@ import type { FormSubmitEvent } from '#ui/types'
 import type { LogInSchema } from '~/components/Auth/Login.vue'
 import { jwtStorage } from '~/utils/jwt'
 import { ApiError } from '~/transport/http/client'
+import { useAuthStore } from '~/store/auth'
 
 export function useLogin() {
   const { mutateAsync } = useMutation({
@@ -11,6 +12,7 @@ export function useLogin() {
   })
   const toast = useToast()
   const router = useRouter()
+  const auth = useAuthStore()
 
   const handleSubmit = async (event: FormSubmitEvent<LogInSchema>) => {
     try {
@@ -28,6 +30,7 @@ export function useLogin() {
       router.push({
         path: '/',
       })
+      auth.set(r.user)
     } catch (e) {
       if (e instanceof ApiError) {
         toast.add({
