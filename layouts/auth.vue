@@ -6,4 +6,15 @@
     <slot />
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useAuthStore } from '~/store/auth'
+
+const auth = useAuthStore()
+const router = useRouter()
+
+if (auth.user) {
+  await router.push({
+    path: "/"
+  })
+}
+</script>

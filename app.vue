@@ -4,10 +4,11 @@
       <NuxtPage />
     </UApp>
   </NuxtLayout>
+  <VueQueryDevtools />
 </template>
 <script setup lang="ts">
 import { useMenuStore } from '~/store/ui/menu'
-import { ApiError, client } from '~/transport/http/client'
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 const colorMode = useColorMode()
 

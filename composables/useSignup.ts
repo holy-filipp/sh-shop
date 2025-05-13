@@ -4,6 +4,7 @@ import type { FormSubmitEvent } from '#ui/types'
 import { jwtStorage } from '~/utils/jwt'
 import { ApiError } from '~/transport/http/client'
 import type { SignUpSchema } from '~/components/Auth/SignUp.vue'
+import { useAuthStore } from '~/store/auth'
 
 export function useSignup() {
   const { mutateAsync } = useMutation({
@@ -11,6 +12,7 @@ export function useSignup() {
   })
   const toast = useToast()
   const router = useRouter()
+  const auth = useAuthStore()
 
   const handleSubmit = async (event: FormSubmitEvent<SignUpSchema>) => {
     try {
@@ -30,6 +32,7 @@ export function useSignup() {
       router.push({
         path: '/',
       })
+      auth.set(r.user)
     } catch (e) {
       if (e instanceof ApiError) {
         toast.add({

@@ -623,10 +623,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.3.tgz#c2b9d2e374ee62c586d3adbea87199b1d7a7a6ba"
   integrity sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==
 
-"@iconify-json/lucide@^1.2.41":
-  version "1.2.41"
-  resolved "https://registry.yarnpkg.com/@iconify-json/lucide/-/lucide-1.2.41.tgz#8b863d2fce935920fbe2db17dccb9d53a7d5fa1e"
-  integrity sha512-rOOahfHMgWPqLyRLvLSqEwCmS4jEDxB1Pk63QTe0GObLBKgYKlPmuc1zKYzSuPPkLX/ND7rScVOIDb//ggMNzg==
+"@iconify-json/lucide@^1.2.42":
+  version "1.2.42"
+  resolved "https://registry.yarnpkg.com/@iconify-json/lucide/-/lucide-1.2.42.tgz#5a52710c27aeafadbda5d214967d9d3028c3ca16"
+  integrity sha512-exkRygF4yd6e5q966TXJQc/b+MAu3iQb8LeExCjl2JoP4/RlpudkYpg1AIZVCVCjAiElDYmVJYDWiJXPLkFN/g==
   dependencies:
     "@iconify/types" "*"
 
@@ -1935,6 +1935,11 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.75.7.tgz#8de9de6de4ae33e532f1fc99a8633e3461f30db9"
   integrity sha512-4BHu0qnxUHOSnTn3ow9fIoBKTelh0GY08yn1IO9cxjBTsGvnxz1ut42CHZqUE3Vl/8FAjcHsj8RNJMoXvjgHEA==
 
+"@tanstack/query-devtools@5.76.0":
+  version "5.76.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.76.0.tgz#ba43754ed8d23a265ed72f17de618fa9f9c7649d"
+  integrity sha512-1p92nqOBPYVqVDU0Ua5nzHenC6EGZNrLnB2OZphYw8CNA1exuvI97FVgIKON7Uug3uQqvH/QY8suUKpQo8qHNQ==
+
 "@tanstack/table-core@8.21.3":
   version "8.21.3"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.21.3.tgz#2977727d8fc8dfa079112d9f4d4c019110f1732c"
@@ -1944,6 +1949,13 @@
   version "3.13.8"
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.8.tgz#6346e688521c1f086f508ccbebaad0b472a2aefb"
   integrity sha512-BT6w89Hqy7YKaWewYzmecXQzcJh6HTBbKYJIIkMaNU49DZ06LoTV3z32DWWEdUsgW6n1xTmwTLs4GtWrZC261w==
+
+"@tanstack/vue-query-devtools@^5.76.0":
+  version "5.76.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/vue-query-devtools/-/vue-query-devtools-5.76.0.tgz#c456ff8525e33c79de8d2f48000ca9165025e656"
+  integrity sha512-5+AlC3gXDWV1SnxHOFfdUp4pL2SkypUGdDnAYOhZbubjqRrTvOtsCwqwvHJG/ohNmDayoZakjZ4dPcgbBI8oPA==
+  dependencies:
+    "@tanstack/query-devtools" "5.76.0"
 
 "@tanstack/vue-query@^5.75.7":
   version "5.75.7"

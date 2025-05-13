@@ -12,6 +12,10 @@ export default defineNuxtConfig({
         dir: './assets/icons',
       },
     ],
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 256,
+    },
   },
   routeRules: {
     '/cms/**': { proxy: `${process.env.API_BASE_URL}/**` },

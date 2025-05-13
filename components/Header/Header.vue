@@ -1,7 +1,9 @@
 <template>
   <header class="border-muted sticky top-0 right-0 left-0 z-100 border-b-1 bg-transparent backdrop-blur-sm">
     <UContainer class="flex items-center justify-between">
-      <UIcon name="i-custom-logo-full" class="h-16 w-48" />
+      <ULink class="flex flex-col items-center justify-center" to="/">
+        <UIcon name="i-custom-logo-full" class="h-16 w-48" />
+      </ULink>
       <UButton
         :icon="menu.isOpened ? 'i-lucide-x' : 'i-lucide-menu'"
         color="neutral"
@@ -12,9 +14,9 @@
       <UNavigationMenu highlight highlight-color="primary" :items="NAV_ITEMS" class="hidden md:flex" />
       <div class="hidden items-center gap-2 md:flex">
         <UDropdownMenu v-if="auth.isAuthorized()" :items="DROPDOWN_ITEMS" :content="{ align: 'end' }">
-          <UButton icon="i-lucide-menu">{{ auth.user?.email }}</UButton>
+          <UButton icon="i-lucide-menu">{{ displayName }}</UButton>
         </UDropdownMenu>
-        <UButton icon="i-lucide-log-in" to="/auth/login" v-else>Войти</UButton>
+        <UButton v-else icon="i-lucide-log-in" to="/auth/login">Войти</UButton>
         <UChip :text="1" size="3xl">
           <UButton icon="i-lucide-shopping-cart" variant="soft" />
         </UChip>
@@ -31,6 +33,13 @@ import { useAuthStore } from '~/store/auth'
 
 const auth = useAuthStore()
 const menu = useMenuStore()
+const displayName = computed(() => {
+  if (auth.user) {
+    return auth.user.name ?? auth.user.email
+  }
+
+  return 'Не авторизирован'
+})
 
 const NAV_ITEMS: NavigationMenuItem[] = [
   {
