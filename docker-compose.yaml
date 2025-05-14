@@ -1,9 +1,0 @@
-services:
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_USER: filipp
-      POSTGRES_PASSWORD: filipp
-    ports:
-      - 5432:5432

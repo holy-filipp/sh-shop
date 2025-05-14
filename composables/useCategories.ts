@@ -16,6 +16,7 @@ export function useCategories() {
         label: category.label,
         icon: category.icon ? `i-lucide-${category.icon}` : undefined,
         children: [],
+        size: 'lg',
       } as NavigationMenuItem)
     })
 
