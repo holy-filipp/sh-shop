@@ -1,7 +1,9 @@
 <template>
   <UContainer class="py-4">
     <div class="text-lg font-medium">Выберите категорию товаров</div>
-    <Categories />
+    <div class="mt-2">
+      <Categories />
+    </div>
   </UContainer>
 </template>
 <script lang="ts" setup>

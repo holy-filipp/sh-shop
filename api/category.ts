@@ -22,6 +22,7 @@ interface ICategoryDto {
   publishedAt: string
   label: string
   parent?: ICategoryDto
+  slug: string
 }
 
 export const categoryApi = {

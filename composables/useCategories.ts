@@ -16,7 +16,7 @@ export function useCategories() {
         label: category.label,
         icon: category.icon ? `i-lucide-${category.icon}` : undefined,
         children: [],
-        size: 'lg',
+        to: category.slug,
       } as NavigationMenuItem)
     })
 
@@ -25,12 +25,14 @@ export function useCategories() {
     rawData.forEach((category) => {
       if (!category.parent) {
         const item = categoryMap.get(category.label)
+
         if (item) {
           rootItems.push(item)
         }
       } else {
         const parentItem = categoryMap.get(category.parent.label)
         const childItem = categoryMap.get(category.label)
+
         if (parentItem && childItem) {
           parentItem.children!.push(childItem)
         }
