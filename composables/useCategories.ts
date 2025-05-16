@@ -10,31 +10,34 @@ export function useCategories() {
     const rawData = data.value.data.slice()
 
     const categoryMap = new Map<string, NavigationMenuItem>()
+    const slugPaths = new Map<string, string>()
 
     rawData.forEach((category) => {
-      categoryMap.set(category.label, {
+      categoryMap.set(category.documentId, {
         label: category.label,
-        icon: category.icon ? `i-lucide-${category.icon}` : undefined,
+        icon: `i-lucide-${category.icon}`,
+        to: '',
         children: [],
-        to: category.slug,
       } as NavigationMenuItem)
+      slugPaths.set(category.documentId, category.slug)
     })
 
     const rootItems: NavigationMenuItem[] = []
 
     rawData.forEach((category) => {
+      const item = categoryMap.get(category.documentId)!
+
       if (!category.parent) {
-        const item = categoryMap.get(category.label)
-
-        if (item) {
-          rootItems.push(item)
-        }
+        item.to = `/shop/${category.slug}`
+        rootItems.push(item)
       } else {
-        const parentItem = categoryMap.get(category.parent.label)
-        const childItem = categoryMap.get(category.label)
-
-        if (parentItem && childItem) {
-          parentItem.children!.push(childItem)
+        const parentItem = categoryMap.get(category.parent.documentId)
+        if (parentItem) {
+          const parentPath = slugPaths.get(category.parent.documentId) || ''
+          const fullPath = `${parentPath}/${category.slug}`
+          slugPaths.set(category.documentId, fullPath)
+          item.to = `/shop/${fullPath}`
+          parentItem.children!.push(item)
         }
       }
     })

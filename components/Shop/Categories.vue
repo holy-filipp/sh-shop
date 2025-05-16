@@ -6,17 +6,5 @@
 </template>
 <script setup lang="ts">
 const { categories, isLoading, error } = useCategories()
-const toast = useToast()
-
-watch(error, (newError) => {
-  if (!newError) {
-    return
-  }
-
-  toast.add({
-    title: 'Ошибка',
-    color: 'error',
-    description: newError?.message,
-  })
-})
+useErrorHandler(error)
 </script>

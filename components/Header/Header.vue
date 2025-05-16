@@ -4,21 +4,25 @@
       <ULink class="flex flex-col items-center justify-center" to="/">
         <UIcon name="i-custom-logo-full" class="h-16 w-48" />
       </ULink>
-      <UButton
-        :icon="menu.isOpened ? 'i-lucide-x' : 'i-lucide-menu'"
-        color="neutral"
-        variant="ghost"
-        class="md:hidden"
-        @click="menu.toggle"
-      />
+      <div class="flex items-center justify-center gap-2 md:hidden">
+        <UChip :inset="true" :text="cart.itemsInCart()" :show="cart.itemsInCart() > 0" size="3xl">
+          <UButton to="/cart" icon="i-lucide-shopping-cart" variant="ghost" color="neutral" />
+        </UChip>
+        <UButton
+          :icon="menu.isOpened ? 'i-lucide-x' : 'i-lucide-menu'"
+          color="neutral"
+          variant="ghost"
+          @click="menu.toggle"
+        />
+      </div>
       <UNavigationMenu highlight highlight-color="primary" :items="NAV_ITEMS" class="hidden md:flex" />
       <div class="hidden items-center gap-2 md:flex">
         <UDropdownMenu v-if="auth.isAuthorized()" :items="DROPDOWN_ITEMS" :content="{ align: 'end' }">
           <UButton icon="i-lucide-menu">{{ displayName }}</UButton>
         </UDropdownMenu>
         <UButton v-else icon="i-lucide-log-in" to="/auth/login">Войти</UButton>
-        <UChip :text="1" size="3xl">
-          <UButton icon="i-lucide-shopping-cart" variant="soft" />
+        <UChip :text="cart.itemsInCart()" :show="cart.itemsInCart() > 0" size="3xl">
+          <UButton to="/cart" icon="i-lucide-shopping-cart" variant="soft" />
         </UChip>
       </div>
     </UContainer>
@@ -30,6 +34,7 @@ import type { NavigationMenuItem } from '#ui/components/NavigationMenu.vue'
 import type { DropdownMenuItem } from '#ui/components/DropdownMenu.vue'
 import { useMenuStore } from '~/store/ui/menu'
 import { useAuthStore } from '~/store/auth'
+import { useCartStore } from '~/store/cart'
 
 const auth = useAuthStore()
 const menu = useMenuStore()
@@ -40,6 +45,7 @@ const displayName = computed(() => {
 
   return 'Не авторизирован'
 })
+const cart = useCartStore()
 
 const NAV_ITEMS: NavigationMenuItem[] = [
   {

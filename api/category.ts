@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/vue-query'
 import { client } from '~/transport/http/client'
 
-interface IPaginatedResponseDto<T> {
+export interface IPaginatedResponseDto<T> {
   data: T
   meta: {
     pagination: {
@@ -13,7 +13,7 @@ interface IPaginatedResponseDto<T> {
   }
 }
 
-interface ICategoryDto {
+export interface ICategoryDto {
   id: number
   documentId: string
   icon: string

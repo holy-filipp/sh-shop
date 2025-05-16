@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="py-4">
+  <UContainer class="mt-4">
     <div class="text-lg font-medium">Выберите категорию товаров</div>
     <div class="mt-2">
       <Categories />
