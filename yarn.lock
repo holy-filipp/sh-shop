@@ -8299,6 +8299,11 @@ vue-router@^4.5.1:
   dependencies:
     "@vue/devtools-api" "^6.6.4"
 
+vue-strapi-blocks-renderer@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/vue-strapi-blocks-renderer/-/vue-strapi-blocks-renderer-0.2.2.tgz#5b67a86177c3095a49a01fa127f28add371720e6"
+  integrity sha512-QkUF5KJ59lL05X2uXDLJV7jSchyHQjtK9dQvUDirYcxKsHBLIqO0vq+7OVvqiEPIY0q5k11CyQVmQrC8ENocXw==
+
 vue@^3.4.5, vue@^3.5.13:
   version "3.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.13.tgz#9f760a1a982b09c0c04a867903fc339c9f29ec0a"

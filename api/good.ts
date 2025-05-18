@@ -1,7 +1,8 @@
 import { queryOptions, keepPreviousData } from '@tanstack/vue-query'
 import { client } from '~/transport/http/client'
-import type { IPaginatedResponseDto } from '~/api/category'
+import type { ICategoryDto, IPaginatedResponseDto } from '~/api/category'
 import qs from 'qs'
+import { type BlocksContent } from 'vue-strapi-blocks-renderer'
 
 interface IStrapiMediaFormat {
   ext: string
@@ -56,6 +57,30 @@ export interface ISimplifiedGoodDto {
   gallery: IStrapiMediaItem[]
 }
 
+export interface IStrapiJsonBlock {
+  type: string
+  text?: string
+  'children?': IStrapiJsonBlock[]
+}
+
+export interface IGoodDto {
+  id: number
+  documentId: string
+  name: string
+  price: number
+  description: BlocksContent
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  category: ICategoryDto
+  gallery: IStrapiMediaItem[]
+}
+
+interface IResponse<T> {
+  data: T
+  meta: unknown
+}
+
 export const goodApi = {
   baseKey: 'good',
   getGoodsByCategoryQueryOptions: (category: Ref<string>, page: Ref<number>, pageSize: Ref<number>) =>
@@ -105,12 +130,12 @@ export const goodApi = {
         })
       },
     }),
-  getGoodByIdQueryOptions: (id: ComputedRef<string>) =>
+  getGoodByIdQueryOptions: (id: string) =>
     queryOptions({
       placeholderData: keepPreviousData,
-      queryKey: computed(() => [goodApi.baseKey, 'by', 'ids', id.value]),
+      queryKey: [goodApi.baseKey, 'by', 'ids', id],
       queryFn: (meta) =>
-        client.request<IPaginatedResponseDto<ISimplifiedGoodDto[]>>(`api/good/${computed(() => id.value)}?populate=*`, {
+        client.request<IResponse<IGoodDto>>(`api/goods/${id}?populate=*`, {
           signal: meta.signal,
         }),
     }),

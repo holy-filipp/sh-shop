@@ -31,7 +31,12 @@
             Итого:
             <div>{{ total }}₽</div>
           </div>
-          <UButton class="justify-center" icon="i-lucide-file-up">Перейти к оформлению</UButton>
+          <UButton v-if="!auth.isAuthorized()" class="justify-center" icon="i-lucide-log-in" to="/auth/login"
+            >Войдите для оформления</UButton
+          >
+          <UButton v-else class="justify-center" icon="i-lucide-file-up" to="/create-order"
+            >Перейти к оформлению</UButton
+          >
         </div>
       </template>
     </UCard>
@@ -41,8 +46,10 @@
 import { useGoodsByIds } from '~/composables/useGoodsByIds'
 import { useCartStore } from '~/store/cart'
 import { twMerge } from 'tailwind-merge'
+import { useAuthStore } from '~/store/auth'
 
 const cart = useCartStore()
+const auth = useAuthStore()
 const cartItems = cart.getItemsIds()
 const { goods, isLoading, error, isFetching } = useGoodsByIds(cartItems)
 useErrorHandler(error)
